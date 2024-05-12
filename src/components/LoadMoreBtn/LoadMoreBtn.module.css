@@ -1,0 +1,10 @@
+.btn {
+    background-color: #d3d3d3;
+    width: 150px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
