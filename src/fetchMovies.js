@@ -21,52 +21,51 @@ export const fetchTrendingMovies = async (currentPage) => {
         throw error;
     }
 };
-// export const fetchSearchMovie = async (searchQuery, currentPage) => {
-//     try {
-//         const response = await axios.get("/3/search/movie", {
-//             params: {
-//                 api_key: API_KEY,
-//                 query: searchQuery,
-//                 per_page: 10,
-//                 page: currentPage,
-//             },
-//             ...options,
-//         });
-//         return response.data.results;
-//     } catch (error) {
-//         console.error('Error fetching trending movies:', error);
-//         throw error;
-//     }
-// };
+export const fetchSearchMovie = async (searchQuery, currentPage) => {
+    try {
+        const response = await axios.get("/3/search/movie", {
+            params: {
+                api_key: API_KEY,
+                query: searchQuery,
+                page: currentPage,
+            },
+            ...options,
+        });
+        return response.data.results;
+    } catch (error) {
+        console.error('Error fetching trending movies:', error);
+        throw error;
+    }
+};
 
-// export const fetchMovieById = async (id) => {
-//     try {
-//         const response = await axios.get(`3/movie/${id}?api_key=${API_KEY}`, options);
-//         return response.data;
-//     }
-//     catch (error) {
-//         console.error('Error fetching movie by ID:', error);
-//         throw error;
-//     }
-// };
+export const fetchMovieById = async (id) => {
+    try {
+        const response = await axios.get(`3/movie/${id}?api_key=${API_KEY}`, options);
+        return response.data;
+    }
+    catch (error) {
+        console.error('Error fetching movie by ID:', error);
+        throw error;
+    }
+};
 
-// export const fetchMovieCreditsById = async (id) => {
-//     try {
-//         const response = await axios.get(`3/movie/${id}/credits?api_key=${API_KEY}`, options);
-//         return response.data.cast;
-//     }
-//     catch (error) {
-//         console.error('Error fetching movie cast by ID:', error);
-//         throw error;
-//     }
-// };
+export const fetchMovieCreditsById = async (id) => {
+    try {
+        const response = await axios.get(`3/movie/${id}/credits?api_key=${API_KEY}`, options);
+        return response.data.cast;
+    }
+    catch (error) {
+        console.error('Error fetching movie cast by ID:', error);
+        throw error;
+    }
+};
 
-// export const fetchMovieRevievsById = async (id) => {
-//     try {
-//         const response = await axios.get(`/3/movie/${id}/reviews?api_key=${API_KEY}`, options);
-//         return response.data.results;
-//     } catch (error) {
-//         console.error('Error fetching movie cast by ID:', error);
-//         throw error;
-//     }
-// };
+export const fetchMovieRevievsById = async (id) => {
+    try {
+        const response = await axios.get(`/3/movie/${id}/reviews?api_key=${API_KEY}`, options);
+        return response.data.results;
+    } catch (error) {
+        console.error('Error fetching movie cast by ID:', error);
+        throw error;
+    }
+};
