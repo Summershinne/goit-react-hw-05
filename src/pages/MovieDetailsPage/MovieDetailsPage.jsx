@@ -1,5 +1,5 @@
-import { Suspense, useEffect, useState } from "react";
-import { Outlet, useParams, Link } from "react-router-dom";
+import { Suspense, useEffect, useRef, useState } from "react";
+import { Outlet, useParams, Link, useLocation } from "react-router-dom";
 import { fetchMovieById } from "../../fetchMovies";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import Loader from "../../components/Loader/Loader";
@@ -11,7 +11,9 @@ export default function MovieDetailsPage() {
     const [error, setError] = useState(false);
 
     const { movieId } = useParams();
-    
+    const location = useLocation();
+    const backLinkURLRef = useRef(location.state ?? "/movies");
+
     useEffect(() => {
         async function fetchMovie() {
             try {
@@ -32,7 +34,7 @@ export default function MovieDetailsPage() {
     return (
         <div>
             <div>
-
+<Link to={backLinkURLRef.current}>Go Back</Link>
             </div>
             {movies && <MovieInfo movie={movies} />}
             {error && <ErrorMessage />}

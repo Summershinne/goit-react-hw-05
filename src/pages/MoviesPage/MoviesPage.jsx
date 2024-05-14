@@ -17,23 +17,19 @@ const [page, setPage] = useState(1);
     const query = searchParams.get("query") ?? "";
 
     const handleSearch = (newQuery) => {
-       setSearchParams({ query: newQuery });
-    setPage(1);
-    setMovies([]);
+        searchParams.set("query", newQuery);
+        setSearchParams(searchParams);
+        setMovies([]);
   };
-    const handleLoadMore = () => {
-        setPage(page + 1);
-    };
-
-    const visibleMovies = useMemo(() => { return movies.filter((movie) => movie.title.toLowerCase().includes(query.toLowerCase())) }, [query,movies]);
-    
+   
      useEffect(() => {
         if (query === "") { return }
          async function getMovies() {
              try {
                  setError(false);
                  setLoading(true);
-                 const data = await fetchSearchMovie(page,query);
+                 const data = await fetchSearchMovie(page, query);
+                 console.log(data);
                  setMovies((prevMovies) => {
                      return [...prevMovies, ...data]
                  });
@@ -44,16 +40,22 @@ const [page, setPage] = useState(1);
              }
          }
          getMovies();
-    }, [page, query]);
+     }, [page, query]);
+    
+
+     const handleLoadMore = () => {
+        setPage(page + 1);
+    };
+    
     return (
         <main>
             <SearchBar onSubmit={ handleSearch} />
       {error && <ErrorMessage />}
       {loading && <Loader />}
-      {movies.length > 0 && <MovieList movies={visibleMovies} />}
+      {movies.length > 0 && <MovieList movies={movies} />}
       {movies.length > 0 && !loading && (
         <LoadMoreButton onClick={handleLoadMore} />
       )}    
 </main>
         )
-}
+};

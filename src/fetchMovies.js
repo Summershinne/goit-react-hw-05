@@ -5,6 +5,7 @@ const api_read_access_token = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhNzUwODg0MmE4Nzhi
 const API_KEY = "a7508842a878b2de0554a2d4d079c0d1";
 
 const options = {
+    method: 'GET',
   headers: {
     Authorization: `Bearer ${api_read_access_token}`
   }
@@ -13,7 +14,6 @@ const options = {
 export const fetchTrendingMovies = async (currentPage) => {
     try {
         const response = await axios.get(`/3/trending/movie/day?api_key=${API_KEY}&page=${currentPage}`, options);
-        console.log(response);
         return response.data.results;
     }
     catch (error) {
@@ -21,19 +21,19 @@ export const fetchTrendingMovies = async (currentPage) => {
         throw error;
     }
 };
-export const fetchSearchMovie = async (searchQuery, currentPage) => {
+export const fetchSearchMovie = async (page, query) => {
     try {
-        const response = await axios.get("/3/search/movie", {
+        const response = await axios.get('/3/search/movie', {
             params: {
                 api_key: API_KEY,
-                query: searchQuery,
-                page: currentPage,
-            },
-            ...options,
+                page: page,
+                query: query,
+            },   
+            ...options
         });
         return response.data.results;
     } catch (error) {
-        console.error('Error fetching trending movies:', error);
+        console.error('Error fetching movies:', error);
         throw error;
     }
 };
